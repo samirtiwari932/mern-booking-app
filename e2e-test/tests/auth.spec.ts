@@ -33,7 +33,7 @@ test("should allow the user to register", async ({page}) => {
   await page.locator("[name=password] ").fill("password123");
   await page.locator("[name=confirmPassword] ").fill("password123");
 
-  await expect(page.getByRole("button", {name: "Create Account"})).toBeVisible();
+  await page.getByRole("button", {name: "Create Account"}).click();
 
   await expect(page.getByText("Registration success")).toBeVisible();
   await expect(page.getByRole("link", {name: "My Bookings"})).toBeVisible();

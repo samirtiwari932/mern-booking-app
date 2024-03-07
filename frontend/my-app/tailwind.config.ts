@@ -15,7 +15,7 @@ const config: Config = {
       container: {
         padding: {
           md: "10rem",
-          lg: "15rem",
+          lg: "12rem",
         },
       },
     },
