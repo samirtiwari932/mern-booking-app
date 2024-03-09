@@ -12,7 +12,7 @@ export type HotelFormData = {
     name: string,
     city: string,
     country: string,
-    description: string,
+    desc: string,
     type: string,
     pricePerNight: number,
     starRating: number,
@@ -34,7 +34,7 @@ const ManageHotelForm = ({ onSave, isLoading }: Props) => {
         formData.append("name", FormDataJson.name)
         formData.append("city", FormDataJson.city)
         formData.append("country", FormDataJson.country)
-        formData.append("description", FormDataJson.description)
+        formData.append("description", FormDataJson.desc)
         formData.append("type", FormDataJson.type)
         formData.append("pricePerNight", FormDataJson.pricePerNight.toString())
         formData.append("starRating", FormDataJson.starRating.toString())
