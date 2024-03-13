@@ -37,9 +37,9 @@ const DetailsSection = () => {
             </div>
             <label className='text-gray-700 text-sm font-bold flex-1'>
                 Desc
-                <textarea rows={10} className='border rounded w-full py-1 px-2 font-normal' {...register("desc", { required: "This field is required" })}></textarea>
-                {errors.desc && (
-                    <span className='text-red-500'>{errors.desc.message}</span>
+                <textarea rows={10} className='border rounded w-full py-1 px-2 font-normal' {...register("description", { required: "This field is required" })}></textarea>
+                {errors.description && (
+                    <span className='text-red-500'>{errors.description.message}</span>
                 )}
             </label>
             <div className='flex gap-4'>

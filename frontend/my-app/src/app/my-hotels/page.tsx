@@ -13,19 +13,24 @@ const page = () => {
     });//will give the response as data which is further renameed to as hotel data
 
     if (!hotelData) {
-        return <span>No Hotels found</span>
+        return <span className='flex justify-between'>
+            <h1 className='text-3xl font-bold'>No Hotels found</h1>
+            <Link href='/add-hotel'
+                className='flex bg-blue-600 text-white text-xl font-bold p-2 hover:bg-blue-500'
+            >Add Hotel</Link>
+        </span>
     }
     return (
         <div className='space-y-5 '>
             <span className='flex justify-between'>
                 <h1 className='text-3xl font-bold'>My Hotels</h1>
-                <Link href='/add-hotels'
+                <Link href='/add-hotel'
                     className='flex bg-blue-600 text-white text-xl font-bold p-2 hover:bg-blue-500'
                 >Add Hotel</Link>
             </span>
             <div className='grid grid-cols-1 gap-8'>
                 {hotelData.map((hotel) => (
-                    <div className='flex flex-col justify-between border border-blue-300 rounded-lg p-8 gap-5  '>
+                    <div key={hotel._id} className='flex flex-col justify-between border border-blue-300 rounded-lg p-8 gap-5  '>
                         <h2 className='text-2xl font-bold '>{hotel.name}
                         </h2>
                         <div className='whitespace-pre-line'>{hotel.description}</div>

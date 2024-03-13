@@ -1,5 +1,5 @@
 "use client"
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { FormProvider, useForm } from "react-hook-form"
 import DetailsSection from './DetailsSection';
@@ -8,33 +8,43 @@ import TypesSection from '@/components/forms/ManageHotelForms/TypesSection';
 import FacilitiesSection from './FacilitiesSection';
 import GuestsSection from './GuestsSection';
 import ImageSection from './ImageSection';
+import { HotelType } from '../../../../../../backend/src/shared/types';
 export type HotelFormData = {
     name: string,
     city: string,
     country: string,
-    desc: string,
+    description: string,
     type: string,
     pricePerNight: number,
     starRating: number,
     facilities: string[],
     imageFiles: FileList,
+    imageUrls: string[]
     adultCount: number,
     childCount: number
 }
 type Props = {
-    onSave: (hotelFormData: FormData) => void
-    isLoading: boolean
+    onSave: (hotelFormData: FormData) => void;
+    isLoading: boolean;
+    hotel?: HotelType // we oly receive hotel on the edit page when on the add hotel we don't receive any hotel thats why optinal 
 }
-const ManageHotelForm = ({ onSave, isLoading }: Props) => {
+const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
     const formMethods = useForm<HotelFormData>();
-    const { handleSubmit } = formMethods;
+    const { handleSubmit, reset } = formMethods;
+
+    useEffect(() => {
+        reset(hotel)
+    }, [reset, hotel])
 
     const onSubmit = handleSubmit((FormDataJson: HotelFormData) => {
         const formData = new FormData()
+        if (hotel) {
+            formData.append("hotelId", hotel._id)
+        }
         formData.append("name", FormDataJson.name)
         formData.append("city", FormDataJson.city)
         formData.append("country", FormDataJson.country)
-        formData.append("description", FormDataJson.desc)
+        formData.append("description", FormDataJson.description)
         formData.append("type", FormDataJson.type)
         formData.append("pricePerNight", FormDataJson.pricePerNight.toString())
         formData.append("starRating", FormDataJson.starRating.toString())
@@ -44,6 +54,15 @@ const ManageHotelForm = ({ onSave, isLoading }: Props) => {
         FormDataJson.facilities.forEach((facility, index) => {
             formData.append(`facilities[${index}]`, facility)
         })
+
+        //[image1.jpg,image2.jpg,image3.jpg]
+        // imageUrls = [image1.jpg]
+
+        if (FormDataJson.imageUrls) {
+            FormDataJson.imageUrls.forEach((url, index) => {
+                formData.append(`imageUrls[${index}]`, url)
+            })
+        }
 
         Array.from(FormDataJson.imageFiles).forEach((imageFile) => {
             formData.append(`imageFiles`, imageFile)
