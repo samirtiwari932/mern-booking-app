@@ -4,14 +4,9 @@
 const nextConfig = {
   /* config options here */
   // output: "export",
+
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "res.cloudinary.com",
-        port: "",
-      },
-    ],
+    domains: ["res.cloudinary.com"],
   },
 };
 

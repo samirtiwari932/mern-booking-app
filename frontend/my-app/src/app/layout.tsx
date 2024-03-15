@@ -7,6 +7,8 @@ import Footer from "@/components/Footer";
 import { QueryClient, QueryClientProvider } from "react-query";
 import QueryClientComponent from "@/components/QueryClientComponent";
 import { AppContextProvider } from "@/context/AppContext";
+import { SearchContextProvider } from "@/context/SeachContext";
+import SearchBar from "@/components/SearchBar";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,16 +28,18 @@ export default function RootLayout({
       <body className={`flex flex-col  min-h-screen ${inter.className}`}>
         <QueryClientComponent>
           <AppContextProvider>
+            <SearchContextProvider>
+              <Header />
+              <Hero />
+              <div className="container mx-auto">
+                <SearchBar />
+              </div>
+              <div className="container mx-auto py-10 flex-1">
 
-
-            <Header />
-            <Hero />
-            <div className="container mx-auto py-10 flex-1">
-
-              {children}
-            </div>
-            <Footer />
-
+                {children}
+              </div>
+              <Footer />
+            </SearchContextProvider>
           </AppContextProvider>
         </QueryClientComponent>
       </body>
