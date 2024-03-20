@@ -15,7 +15,7 @@ const isLoading = false;
 const page = () => {
     const { showToast } = useAppContext()
     const { hotelId } = useParams<EditHotelProps>();
-    console.log(hotelId, "dxfgvhbjnkml")
+    // console.log(hotelId, "dxfgvhbjnkml")
     const { data: hotel } = useQuery("fetchMyHotelsById", () => apiClient.fetchMyHotelsById(hotelId), {
         enabled: !!hotelId
     })
